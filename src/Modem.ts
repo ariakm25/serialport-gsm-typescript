@@ -19,6 +19,7 @@ export class Modem {
 		this.options = {
 			pinCode: options.pinCode ?? null,
 			deleteSmsOnReceive: options.deleteSmsOnReceive ?? false,
+			deleteSmsOnRead: options.deleteSmsOnRead ?? false,
 			enableConcatenation: options.enableConcatenation ?? true,
 			customInitCommand: options.customInitCommand ?? null,
 			autoInitOnOpen: options.autoInitOnOpen ?? true,
@@ -664,6 +665,8 @@ export class Modem {
 		if (resultCode(reponse.pop() || '') !== 'OK' || reponse.length % 2 !== 0) {
 			throw new ModemError(this, `Reading the SMS (${id}) failed!`);
 		}
+
+		this.options.deleteSmsOnRead ? await this.deleteSms(id, prio) : null;
 
 		let preInformation;
 

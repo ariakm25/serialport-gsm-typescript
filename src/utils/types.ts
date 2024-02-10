@@ -6,7 +6,8 @@ import { Deliver, Report, Submit } from 'node-pdu';
 
 export type ModemOptions = {
 	pinCode: string | null;
-	deleteSmsOnReceive: boolean;
+	deleteSmsOnReceive: boolean
+	deleteSmsOnRead: boolean;
 	enableConcatenation: boolean;
 	customInitCommand: string | null;
 	autoInitOnOpen: boolean;
